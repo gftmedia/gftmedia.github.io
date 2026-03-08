@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heltelo Labs</title>
+
+<style>
+*{ margin:0; padding:0; box-sizing:border-box; font-family:system-ui,-apple-system,sans-serif; }
+
+body{
+  color:white;
+  background:#0b0b0b;
+  line-height:1.6;
+}
+
+.hero{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.hero video{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+
+.hero-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
+}
+
+.hero-content h1{
+  font-size:64px;
+  margin-bottom:20px;
+  letter-spacing:-1px;
+}
+
+.hero-content p{
+  font-size:20px;
+  color:#ddd;
+  max-width:700px;
+  margin:auto;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 28px;
+  background:rgb(255,255,255,0.8);
+  color:black;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:600;
+}
+
+
+.section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.section h2{
+  font-size:36px;
+  margin-bottom:40px;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.feature{
+  background:#141414;
+  padding:30px;
+  border-radius:10px;
+}
+
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+
+.project{
+  background:#141414;
+  padding:30px;
+  border-radius:10px;
+  transition:0.2s;
+}
+
+.project:hover{
+  transform:translateY(-5px);
+}
+
+
+footer {
+  text-align:center;
+  padding:40px;
+  color:#888;
+  border-top:1px solid #222;
+}
+</style>
+
+</head>
+<body>
+
+<section class="hero">
+  <video autoplay muted loop playsinline src="hero.mp4"></video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>Heltelo Labs</h1>
+    <p>Turning imagination and research to real-world production use in various fields.</p>
+    <a class="btn" href="#about">Read more</a>
+  </div>
+</section>
+
+
+<section id="about" class="section">
+  <h2>About Us</h2>
+  <p>Heltelo Labs is a for-profit subsidiary which specializes in researching and experimenting with ideas in a variety of fields, from digital to physical.</p>
+  <p>We explore ideas, prototype, and see what works. We have a simple mission: <b>build and provide interesting, useful things.</b></p>
+  <p>On top of this, we conduct and fund very broad studies that can extend to a lot of fields even outside of technology.</p>
+</section>
+
+<section id="whatwedo" class="section">
+  <h2>What We Do</h2>
+  <div class="features">
+    <div class="feature">
+    <h3>ML Experiments</h3>
+    <p>We research the field of Machine Learning and AI to automate and perform various tasks, primarily regarding text data. We use and research various techniques of AI training and deployment.</p>
+    </div>
+
+    <div class="feature">
+    <h3>Development and internal tooling</h3>
+    <p>We develop/research internal tooling for ourselves and other companies that work with us. Our competitive engineers collaborate with other companies to help develop apps.</p>
+    </div>
+
+    <div class="feature">
+    <h3>Contributions to the world</h3>
+    <p>Our research is used in real-world scenarios to help solve critical issues, including (but not limited to) fields like medicine, data analysis and others...</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+    <h3>ChatGFT</h3>
+    <p>A experimental language model for textual modeling, geared towards specific domains.</p>
+    <p>Stay tuned for updates.</p>
+    </div>
+
+    <div class="project">
+    <h3>Heltelo© XMLang</h3>
+    <p>A enterprise-grade turing complete programming language based on XML Markup. Scalable, fast and flexible for various domains.</p>
+    <p>Stay tuned for releases and updates.</p>
+    </div>
+  </div>
+</section>
+
+
+<footer>© 2026 Heltelo Labs and GFT Media Foundation</footer>
+
+</body>
+</html>
