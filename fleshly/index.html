@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fleshly</title>
+  <style>
+    /* Reset & base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: sans-serif;
+      color: #eaeaea;
+      background: #0f0f10;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: #4a90e2; }
+
+    /* Navbar */
+    header {
+      position: fixed;
+      top: 2rem; left: 5rem; right: 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(20,20,22,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    nav a {
+      margin-left: 2rem;
+      font-weight: 500;
+      color: #aaa;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at top center, #662cc4, #0f0f10);
+      max-width: unset;
+    }
+    .hero h2 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #bbb;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background: #753ece;
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, background 0.3s;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: #9545d6;
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2.section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      color: #fff;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .feature {
+      background: #1b1b1f;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      transition: transform 0.2s, border 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .feature h3 { margin-bottom: 1rem; color: #fff; }
+
+    /* Pricing */
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .plan {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.2s, border 0.3s;
+    }
+    .plan:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.3); }
+    .plan h3 { margin-bottom: 1rem; color: #fff; }
+    .plan p.price { font-size: 1.8rem; margin-bottom: 1rem; color: #4a90e2; }
+    .plan ul { margin: 1rem 0; }
+    .plan li { margin: 0.5rem 0; color: #bbb; }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .testimonial {
+      background: #1b1b1f;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+      font-style: italic;
+      color: #ccc;
+    }
+    .testimonial strong { display: block; margin-top: 1rem; color: #fff; font-style: normal; }
+
+    /* Contact */
+    .contact {
+      text-align: center;
+    }
+    .contact p { color: #bbb; margin-bottom: 1rem; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div>NOTE: This is the old, archived Fleshly website before we merged with Heltelo Labs.</div>
+  <header>
+    <h1>fleshly</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Where pleasure meets precision.</h2>
+    <p>The first AI-powered fleshlight is here, with reasonable pricing just for you.</p>
+    <a href="#pricing" class="btn">Get Started</a>
+  </section>
+
+  <section id="features">
+    <h2 class="section-title">Features</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>🔒 Private</h3>
+        <p>Military-grade encryption for health tracking data, powered by AI.</p>
+      </div>
+      <div class="feature">
+        <h3>⚙ Adjustable</h3>
+        <p>Incredibly flexible configuration, tightness, and so on. AI can automatically adjust parameters based on your needs.</p>
+      </div>
+      <div class="feature">
+        <h3>🚀 Performance</h3>
+        <p>Scores state of the art in all widely available fleshlight benchmarks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2 class="section-title">Pricing</h2>
+    <div class="pricing">
+      <div class="plan">
+        <h3>Standard</h3>
+        <p class="price">$5</p>
+        <ul>
+          <li>AI controller, tightness adjustment</li>
+          <li>Bluetooth support</li>
+          <li>Basic session reporting</li>
+        </ul>
+        <a href="#signup" class="btn">Get Started</a>
+      </div>
+      <div class="plan">
+        <h3>Pro</h3>
+        <p class="price">$20</p>
+        <ul>
+          <li>Improved AI sensors</li>
+          <li>Spicy AI Companion (limited use)</li>
+          <li>Advanced tailored AI controller</li>
+          <li>Advanced session and health reports</li>
+        </ul>
+        <a href="#signup" class="btn">Choose Pro</a>
+      </div>
+      <div class="plan">
+        <h3>Ultimate</h3>
+        <p class="price">$50 - $100</p>
+        <ul>
+          <li>Up to 5+ products</li>
+          <li>Dedicated AI solutions</li>
+          <li>Tailored experiences, offering our most advanced features</li>
+        </ul>
+        <a href="#signup" class="btn">Choose Ultimate</a>
+      </div>
+    </div>
+    <small>All rates charged monthly. A subscription is required to use our product.</small>
+  </section>
+
+  <!--
+  <section id="testimonials">
+    <h2 class="section-title">What People Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        “yeah.”
+        <strong>— Lee Flesh, Startup Founder</strong>
+      </div>
+      <div class="testimonial">
+        “great data.”
+        <strong>— Jordan M., Data Analyst</strong>
+      </div>
+      <div class="testimonial">
+        “The.”
+        <strong>— Priya K., CTO</strong>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact">
+      <p>If you want to become a beta tester, you can contact us at <a href="mailto:fleshly.help@outlook.com">fleshly.help@outlook.com</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 fleshly. All rights reserved.</p>
+  </footer>
+</body>
+</html>
