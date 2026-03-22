@@ -1,0 +1,13 @@
+["do",
+  "'Example of factorial written in JSONXL",
+  ["set", "fact", ["fn", ["n"],
+    ["set", "res", 1],
+    ["while", [">", "n", 1],
+      ["set", "res", ["*", "res", "n"]],
+      ["set", "n", ["-", "n", 1]]
+    ],
+    "res"
+  ]],
+
+  ["print", ["fact", 10]]
+]
