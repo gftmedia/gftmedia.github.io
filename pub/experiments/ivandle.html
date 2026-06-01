@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ivandle</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      text-align: center;
+      max-width: 700px;
+      margin: 20px auto;
+    }
+
+    #guesses {
+      height: 400px;
+      overflow-y: auto;
+      border: 1px solid #444;
+      padding: 10px; margin: 10px 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+    .tile {
+      width: 40px; height: 40px;
+      margin: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 1px solid #444;
+      background: #222;
+    }
+
+    .green { background: #538d4e; }
+    .yellow { background: #b59f3b; }
+    .gray { background: #3a3a3c; }
+
+    dialog {
+      border: none;
+      padding: 20px;
+      background: #222; color: white;
+    }
+
+    #note { filter: blur(12px); }
+    #note:hover { filter: none; }
+  </style>
+</head>
+<body>
+  <h1>ivandle</h1>
+
+  <div id="guesses"></div>
+  <input id="guess_in" type="text" />
+  <button id="guess_btn">guess</button>
+  <p id="note"></p>
+
+  <dialog id="win_dialog">
+    <h2>you win!!!</h2>
+    <p id="win_data"></p>
+    <button onclick="document.querySelector('#win_dialog').close()">close</button>
+  </dialog>
+
+
+  <script>
+(() => {
+  const $ = s=>document.querySelector(s);
+  const $on = (el,ev,cb)=>el.addEventListener(ev, cb);
+  const words = [
+    "ivan", "ivanivanov", "cupti", "ivandle",
+    "chocolate cheese", "cottage cheese", "drown in anal water",
+    "gentleparenting", "avinebujohastildo", "horse",
+    "accessibility", "gft media foundation", "castrated trade",
+    "wodle", "fleshly", "heltelo", "telegram",
+    "perm", "sk8", "cinco device",
+    "viral hitler",
+    "bipolar",
+    "agoraphobia",
+    "government",
+    "contributions",
+    "caution",
+    "bad bunny",
+    "myrrh", "vocals",
+    "polygon",
+    "wikipedia"
+  ];
+
+
+  /////////
+  const today = () => new Date().toISOString().slice(0, 10);
+  const store = {
+    KEY: "ivandle.data",
+    load() {
+      const data = JSON.parse(localStorage.getItem(store.KEY) || "{}");
+      return data[today()] || null;
+    },
+    save(state) {
+      const data = JSON.parse(localStorage.getItem(store.KEY) || "{}");
+      data[today()] = state;
+      localStorage.setItem(store.KEY, JSON.stringify(data));
+    },
+  };
+
+  function getWordToday() {
+    const hashstring = (str) => {
+      let h = 0;
+      for (let i=0; i<str.length; i++) h = (h*31 + str.charCodeAt(i)) >>> 0;
+      return h;
+    };
+
+    const seed = hashstring(today());
+    return words[seed % words.length].toLowerCase();
+  }
+
+
+  const target = getWordToday();
+  let state = store.load() || { won: false, guesses: [] };
+
+  const saveState = () => store.save({ won: state.won, guesses: state.guesses });
+
+  /////////
+  const guesses = $("#guesses"), guess_in = $("#guess_in"), guess_btn = $("#guess_btn");
+  const win_dialog = $("#win_dialog"), win_data = $("#win_data");
+
+  $("#note").textContent = `the word has ${target.length} letters and ${target.split(' ').length-1} spaces`;
+
+  function getEmojiGrid() {
+    const rows = [...guesses.querySelectorAll(".row")];
+    return rows.map(row => {
+      return [...row.children].map(tile => {
+        if (tile.classList.contains("green")) return "🟩";
+        if (tile.classList.contains("yellow")) return "🟨";
+        return "⬛";
+      }).join("");
+    }).join("\n");
+  }
+
+
+  function drawGuess(guess) {
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const t = target.split(""), g = guess.split("");
+    const used = Array(t.length).fill(false);
+    const result = Array(g.length).fill("gray");
+
+    // greens
+    for (let i = 0; i < g.length; i++) {
+      if (g[i] === t[i]) {
+        result[i] = "green"; used[i] = true;
+      }
+    }
+
+    // yellows
+    for (let i = 0; i < g.length; i++) {
+      if (result[i] === "green") continue;
+      for (let j = 0; j < t.length; j++) {
+        if (!used[j] && g[i] === t[j]) {
+          result[i] = "yellow"; used[j] = true; break;
+        }
+      }
+    }
+
+    for (let i = 0; i < g.length; i++) {
+      const tile = document.createElement("div");
+      tile.className = "tile " + result[i];
+      tile.textContent = g[i];
+      row.appendChild(tile);
+    }
+
+    guesses.appendChild(row);
+    guesses.scrollTop = guesses.scrollHeight; // auto-scroll to bottom
+  }
+
+
+  function showWin() {
+    const word = state.guesses[state.guesses.length-1]; // last element should be the result i think
+    win_data.innerHTML = `you solved it in ${state.guesses.length} guesses, it was ${word}<br><br>
+    <pre>${getEmojiGrid()}</pre>`;
+
+    win_dialog.showModal();
+  }
+
+
+  function submitGuess(e) {
+    e.preventDefault();
+    if (state.won) return;
+
+    const guess = guess_in.value.toLowerCase().trim();
+    if (!guess) return;
+
+    drawGuess(guess);
+    state.guesses.push(guess);
+    if (guess === target && !state.won) {
+      state.won = true;
+      showWin();
+    }
+    saveState();
+    guess_in.value = "";
+  }
+
+  state.guesses.forEach(drawGuess);
+
+  if (state.won) showWin();
+
+  $on(guess_btn, "click", (e) => submitGuess(e));
+  $on(guess_in, "keydown", e => { if (e.key === "Enter") submitGuess(e); });
+})()
+  </script>
+</body>
+</html>
