@@ -1,0 +1,20 @@
+body {
+  margin: 0; padding: 0;
+  font-family: 'Times New Roman';
+}
+
+.document {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 20px;
+  padding-top: 0;
+  text-align: center;
+}
+
+.box {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+
+.pt-100 { padding-top: 100px; }
