@@ -45,8 +45,8 @@
       background: #222; color: white;
     }
 
-    #note { filter: blur(12px); }
-    #note:hover { filter: none; }
+    /*#note { filter: blur(12px); }
+    #note:hover { filter: none; }*/
   </style>
 </head>
 <body>
@@ -68,11 +68,15 @@
 (() => {
   const $ = s=>document.querySelector(s);
   const $on = (el,ev,cb)=>el.addEventListener(ev, cb);
+  /* duplicates are allowed in the array, they help with randomness and stuff so */
   const words = [
+    /* ivan words */
+    "accessibility","area","case","child","city","company","country","engine","eye","fact","family","friend","google","government","group","hand","home","house","idea","issue","kind","life","mississippi","money","mother","night","number","part","people","place","point","power","problem","question","room","school","service","state","story","student","team","thing","time","water","week","woman","work","world","year",
+
     "ivan", "ivanivanov", "cupti", "ivandle",
     "chocolate cheese", "cottage cheese", "drown in anal water",
     "gentleparenting", "avinebujohastildo", "horse",
-    "accessibility", "gft media foundation", "castrated trade",
+    "gft media foundation", "castrated trade",
     "wodle", "fleshly", "heltelo", "telegram",
     "perm", "sk8", "cinco device",
     "viral hitler",
@@ -83,8 +87,17 @@
     "caution",
     "bad bunny",
     "myrrh", "vocals",
+    "wikipedia",
+    "chile", "gagsis",
+    "diced slices",
+    "cheesy", "open",
+    "gerrymandering",
+    "sicily",
+    "mason",
+    "triangle",
     "polygon",
-    "wikipedia"
+
+    "black", "rain", "rian", "aave", "door",
   ];
 
 
@@ -105,9 +118,12 @@
 
   function getWordToday() {
     const hashstring = (str) => {
-      let h = 0;
-      for (let i=0; i<str.length; i++) h = (h*31 + str.charCodeAt(i)) >>> 0;
-      return h;
+      let h = 0x811c9dc5;
+      for (let i=0; i<str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 0x1000193);
+      }
+      return h >>> 0;
     };
 
     const seed = hashstring(today());
