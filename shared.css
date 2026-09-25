@@ -1,20 +1,79 @@
 body {
   margin: 0; padding: 0;
-  font-family: 'Times New Roman';
+  font-family: times, serif;
+  text-align: center;
+  background: linear-gradient(#fff, #225e91);
+  background-attachment: fixed;
 }
 
-.document {
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 20px;
-  padding-top: 0;
+#root {
+  max-width: 760px;
+  margin: 5px auto;
+  text-align: left;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+#navtop {
+  position: relative;
+  background: transparent url(/navtop.png) no-repeat;
+  height: 122px;
   text-align: center;
 }
 
-.box {
-  border: 1px solid #ddd;
-  padding: 10px;
+#navtop h2 {
+  display: inline-block;
+  margin: 0;  padding: 10px;
+
+  background: #fff;
+  border: 1px solid #000;
+  border-top: none;
+}
+
+#navmenu {
+  height: 35px;
+  background: linear-gradient(#f7f7f7, #d0d0d0);
+  border: 1px solid #888;
+  overflow-x: auto;
+}
+
+#navmenu a {
+  display: inline-block;
+  height: 25px;
+  padding: 5px 20px;
+  border-right: 1px solid #888;
+  color: #333;
+  text-decoration: none;
+}
+
+#navmenu a:hover {
+  /*background: #fff;*/
+  text-decoration: underline;
 }
 
 
-.pt-100 { padding-top: 100px; }
+#content {
+  margin: 10px;
+}
+
+
+#footer {
+  padding-top: 3em;
+  text-align: left;
+}
+
+#footer footer {
+  border-top: 1px solid #000;
+  background: #d0d0d0;
+  color: #333;
+  padding: 15px;
+}
+
+
+
+/* */
+
+.wrapbox {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
