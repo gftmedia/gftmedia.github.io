@@ -9,6 +9,13 @@ $ajax._load = function(page) {
   xhr.onload = function() {
     if (xhr.status == 200) {
       $("#content").innerHTML = xhr.responseText;
+
+      // script tags don't execute by default we have to do this
+      $("#content").querySelectorAll("script").forEach(old => {
+        const ns = document.createElement("script");
+        ns.textContent = old.textContent;
+        old.replaceWith(ns);
+      });
     } else {
       $("#content").innerText = xhr.status+" "+xhr.statusText+": " + page;
     }

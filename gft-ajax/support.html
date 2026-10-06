@@ -1,0 +1,140 @@
+<h2>Support</h2>
+<p>Didn't find what you wanted? We've got you covered! Our state-of-the-art support bot will try to answer your needs to the best of its <span title="is that a new verity">ability.</span> Try it!</p>
+<p>If this still doesn't answer your questions, consider contacting us via e-mail or other channels.</p>
+
+<div id="chatbox">
+  <div id="msgs"></div>
+  <div id="options"></div>
+</div>
+
+
+<style>
+  #chatbox {
+    width: 90%;
+    height: 600px;
+    border: 1px solid #444;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .msg {
+    width: fit-content;
+    max-width: 70%;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    line-height: 1.4;
+  }
+  .msg.bot {
+    background: #eee;
+  }
+  .msg.user {
+    margin-left: auto;
+  }
+
+  #options {
+    padding: 12px;
+    border: 1px solid gray;
+  }
+
+  #options button {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+
+<script>(function(){
+  const conversation = {
+    start: {
+      msg: "Our support bot is down at the moment. Try again later",
+      opt: [],
+    },
+  };
+
+  /*
+  const conversation = {
+    start: {
+      msg: "Hello! Which company are you looking to get help with?",
+      opt: [
+        { text: "GFT Media Foundation", next: "gft_start" },
+        { text: "Heltelo Labs", next: "hl_start" },
+      ],
+    },
+
+    // GFT MEDIA
+    gft_start: {
+      msg: "What can I help you with?",
+      opt: [
+        { text: "What is GFT Media?", next: "gft_whatis" },
+        { text: "What does 'GFT' stand for?", next: "gft_meaning" },
+        { text: "What is the history of GFT?", next: "gft_history" },
+        { text: "What does GFT Media specialize in?", next: "gft_what_does_it_do" },
+      ],
+    },
+    gft_whatis: {
+      msg: "GFT Media is a non-profit organization.",
+      opt: [
+        { text: "Back", next: "gft_start" },
+      ],
+    },
+    gft_what_does_it_do: {
+      msg: "",
+      opt: [],
+    },
+
+
+    // HELTELO
+    hl_start: {
+      msg: "What can I help you with?",
+      opt: [
+        { text: "Can I order/receive a replacement product if my Fleshly breaks?", next: "hl_replace" },
+      ]
+    },
+  };
+  */
+
+
+  const outer    = document.getElementById("chatbox");
+  const messages = document.getElementById("msgs");
+  const options  = document.getElementById("options");
+
+  function sleep(ms) { return new Promise(res => setTimeout(res, ms)); }
+  function rand(min, max) { return Math.floor(Math.random() * (max-min+1))+min; }
+
+  function addMessage(type, text) {
+    const msg = document.createElement("div");
+    msg.className = `msg ${type}`;
+    msg.innerHTML = text;
+    messages.appendChild(msg);
+    outer.scrollTop = outer.scrollHeight;
+    return msg;
+  }
+
+  async function showNode(name) {
+    const node = conversation[name];
+    options.innerHTML = "Loading...";
+    
+    await sleep(rand(200, 3000));
+
+    if (!node) {
+      console.error("accessed", name);
+      addMessage("bot", "An error occurred. Try again later.");
+      options.innerHTML = "";
+      return;
+    }
+
+    addMessage("bot", node.msg);
+    options.innerHTML = "";
+
+    node.opt.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt.text;
+      btn.onclick = function() {
+        addMessage("user", opt.text);
+        showNode(opt.next);
+      };
+      options.appendChild(btn);
+    });
+  }
+
+  showNode("start");
+})();</script>
